@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh '#!/bin/bash'
-                echo 'sudo yum install sdkman'
+                sh '#!/bin/sh'
+                echo 'curl -s "https://get.sdkman.io" | bash'
                 sh 'java -version'
                 sh 'puppet --version'
             }
@@ -14,18 +14,22 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'mkdir /opt/gradle'
-                sh 'cd /home/vinaymachamraj/Downloads'
-                sh 'wget https://services.gradle.org/distributions/gradle-4.0-bin.zip'
-                sh 'unzip -d /opt/gradle gradle-4.0-bin.zip'
-                sh 'ls /opt/gradle/gradle-4.0'
+                echo 'sudo mkdir /opt/gradle'
+                echo 'sudo cd /home/vinaymachamraj/Downloads'
+                echo 'sudo wget https://services.gradle.org/distributions/gradle-4.0-bin.zip'
+                sh 'sudo unzip -d /opt/gradle -o gradle-4.0-bin.zip'
+                sh 'sudo ls /opt/gradle/gradle-4.0'
                 sh 'export PATH=$PATH:/opt/gradle/gradle-4.0/bin'
-                sh 'gradle -version'
+                sh '/opt/gradle/gradle-4.0/bin/gradle -v'
+                sh 'cd ~'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo'
+                echo 'sudo yum check'
+                sh 'sudo yum install -y apache-maven'
                 sh 'mvn -version'
             }
         }
