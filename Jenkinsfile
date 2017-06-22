@@ -32,11 +32,14 @@ pipeline {
                 echo 'sudo wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz'
                 sh 'sudo tar -xvf apache-maven-3.5.0-bin.tar.gz -C /opt/maven'
                 sh 'sudo ls /opt/maven/apache-maven-3.5.0/bin'
+                echo 'export MAVEN_HOME=/opt/maven/apache-maven-3.5.0'
+                echo 'export M2_HOME=$MAVEN_HOME/bin'
                 sh 'export PATH=$PATH:/opt/maven/apache-maven-3.5.0/bin'
                 echo 'sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo'
                 echo 'sudo yum check'
                 echo 'sudo yum install -y apache-maven'
                 sh '/opt/maven/apache-maven-3.5.0/bin/mvn -v'
+                echo 'mvn -v'
             }
         }
     }
