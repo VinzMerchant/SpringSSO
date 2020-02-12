@@ -58,7 +58,10 @@ pipeline {
 
         stage('Test SIT') {
           steps {
-            timeout(time: 15, activity: true)
+            timeout(time: 15, activity: true) {
+              echo 'hello sleeps is over now notify'
+            }
+
           }
         }
 
