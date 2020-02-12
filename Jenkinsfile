@@ -46,7 +46,7 @@ pipeline {
             echo 'Testing..'
             echo 'sudo mkdir /opt/gradle'
             echo 'sudo cd /home/vinaymachamraj/Downloads'
-            echo 'sudo wget https://services.gradle.org/distributions/gradle-4.0-bin.zip
+            echo 'sudo wget https://services.gradle.org/distributions/gradle-4.0-bin.zip'
           }
         }
 
