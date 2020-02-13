@@ -12,6 +12,10 @@ pipeline {
         stage('dev_build') {
           steps {
             bat 'echo "Hello dev build"'
+            timestamps() {
+              powershell 'write-host "Hello"'
+            }
+
           }
         }
 
